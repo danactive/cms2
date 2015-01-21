@@ -53,7 +53,7 @@ server.route({
 			if (!error && incomingMessage.statusCode === 200) {
 				var photoSrc = flickrLib.createJpgPath(response.photos.photo);
 				// todo inclass: output HTML images
-				reply(); // Browser output
+				reply("<img src='hello.png'>"); // Complete browser output
 			}
 		});
     }
