@@ -17,8 +17,8 @@ var createJpgPath = function (photos) {
 
 var myflickrOptions = {
 	"url": 'https://api.flickr.com/services/rest/',
-	"qs": {
-		"method": 'flickr.photos.search', // people.getPublicPhotos
+	"data": {
+		"method": 'flickr.people.getPublicPhotos', // flickr.photos.search
 		"format": 'json',
 		"nojsoncallback": 1
 	},
@@ -27,5 +27,5 @@ var myflickrOptions = {
 
 if (typeof module !== "undefined") {
 	module.exports.createJpgPath = createJpgPath;
-	module.exports.myflickrOptions = myflickrOptions;
+	module.exports.options = myflickrOptions;
 }
