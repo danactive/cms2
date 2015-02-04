@@ -26,26 +26,37 @@
     <div id="mapBox" style="height: 400px;"></div>
     <!-- Leaflet map provider API -->
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <!-- Attach Google Maps API v3 (sensor var allows location detection) -->
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <!-- Mapstraction abstraction layer -->
-    <script src="map/mxn.js?(leaflet)"></script>
+    <script src="map/mxn.js?(googlev3)"></script>
     <!-- Page specific code -->
     <script>
 	// todo inclass centre and zoom on VanArts
-		var map = new mxn.Mapstraction('mapBox', 'leaflet'),
+		var map = new mxn.Mapstraction('mapBox', 'googlev3'),
 			locations = {
 				london: {
 					lat: 51.50733,
 					lon: -0.12769,
-					zoom: 10
+					zoom: 10,
+					label: "Oi London!"
 				},
-				vancouver: {
-					lat: 49.25,
-					lon: -123.1,
-					zoom: 17
+				gastown: {
+					lat: 49.284491,
+					lon: -123.108996,
+					zoom: 17,
+					label: "Hello <b>World</b>"
 				}
 			},
-			van = locations.vancouver;
-		map.setCenterAndZoom(new mxn.LatLonPoint(van.lat, van.lon), van.zoom);
+			target = locations.gastown,
+			pin,
+			point;
+		point = new mxn.LatLonPoint(target.lat, target.lon);
+		map.setCenterAndZoom(point, target.zoom); // once
+		pin = new mxn.Marker(point);
+		pin.setInfoBubble("Hello <b>World</b>");
+		map.addMarker(pin);
+		pin.openBubble();
 	</script>
 </body>
 </html>
