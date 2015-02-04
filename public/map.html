@@ -55,14 +55,12 @@
 		createPin = function (name, target) {
 			var point = new mxn.LatLonPoint(target.lat, target.lon),
 				pin = new mxn.Marker(point);
-			if (name === "london") {
-				map.setCenterAndZoom(point, 2);
-			}
 			pin.setInfoBubble(target.label);
 			map.addMarker(pin);
 			pin.openBubble();
 		};
 		$.each(locations, createPin);
+		map.autoCenterAndZoom();
 	</script>
 </body>
 </html>
