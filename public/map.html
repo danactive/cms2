@@ -30,6 +30,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <!-- Mapstraction abstraction layer -->
     <script src="map/mxn.js?(googlev3)"></script>
+    <!-- jQuery library -->
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
     <!-- Page specific code -->
     <script>
 	// todo inclass centre and zoom on VanArts
@@ -48,15 +50,19 @@
 					label: "Hello <b>World</b>"
 				}
 			},
-			target = locations.gastown,
-			pin,
-			point;
-		point = new mxn.LatLonPoint(target.lat, target.lon);
-		map.setCenterAndZoom(point, target.zoom); // once
-		pin = new mxn.Marker(point);
-		pin.setInfoBubble("Hello <b>World</b>");
-		map.addMarker(pin);
-		pin.openBubble();
+			createPin;
+		map.addLargeControls(); //zoom and pan controls
+		createPin = function (name, target) {
+			var point = new mxn.LatLonPoint(target.lat, target.lon),
+				pin = new mxn.Marker(point);
+			if (name === "london") {
+				map.setCenterAndZoom(point, 2);
+			}
+			pin.setInfoBubble(target.label);
+			map.addMarker(pin);
+			pin.openBubble();
+		};
+		$.each(locations, createPin);
 	</script>
 </body>
 </html>
